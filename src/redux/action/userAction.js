@@ -10,10 +10,11 @@ import {
 import axios from 'axios';
 
 
-
+const localStorage = window.localStorage
 const API = process.env.REACT_APP_NODE_API;
 
-export const signupUser = (userData) => async (dispatch) => {
+
+export const userSignUp = (userData) => async (dispatch) => {
 
     try {
         dispatch({

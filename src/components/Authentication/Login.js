@@ -1,20 +1,56 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { VStack } from '@chakra-ui/react';
 import { FormControl,FormLabel,Input , useToast} from '@chakra-ui/react';
-// import { useHistory } from "react-router-dom";
-import { Button } from '@chakra-ui/react'
+import { useNavigate} from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Button } from '@chakra-ui/react';
+import { userLogin } from '../../redux/action/userAction';
+import Swal from 'sweetalert2';
 const Login = () => {
 
     const [show, setShow] = useState(false);
     const handleClick = () => { setShow(!show)};
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
     const toast = useToast();
-    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     // const history = useHistory();
 
-  
+
+    const { loading, userInfo, error } = useSelector((state) => state.userLogin)
+
+    const handleSubmit = () =>{
+
+        const userData = {
+            email,
+            password
+        };
+        dispatch(userLogin(userData));
+    }
+
+    useEffect(()=> {
+        if(userInfo) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Done'
+            });
+        }
+    },[userInfo,navigate]);
+
+
+    useEffect(()=> {
+        if(error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Try Again'
+            });
+        }
+    },[error]);
+
+
+
+    
 
     return (
         <div>
@@ -27,10 +63,10 @@ const Login = () => {
                     <FormLabel>Password</FormLabel>
                     <Input type='password' value={password} onChange={(e) => { setPassword(e.target.value); }} />
                 </FormControl>
-                <Button colorScheme='teal' size='md'>
+                <Button colorScheme='teal' size='md' onClick={handleSubmit}>
                     Login
                 </Button>
-                <Button colorScheme='purple' size='md'>
+                <Button colorScheme='purple' size='md' >
                     Signup
                 </Button>
             </VStack>
