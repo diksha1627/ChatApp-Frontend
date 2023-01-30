@@ -35,7 +35,9 @@ const Login = () => {
                 icon: 'success',
                 title: 'Login Done'
             });
+            navigate("/chats");
         }
+       
     },[userInfo,navigate]);
 
 

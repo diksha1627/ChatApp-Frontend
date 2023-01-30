@@ -4,14 +4,14 @@ import thunk from "redux-thunk";
 import rootReducer from './reducers/index';
 
 const initialState = {
-    // userSignUp: {
-    //     userInfo:
-    //         JSON.parse(localStorage.getItem('userInfo'))
-    // },
-    // userLogin: {
-    //     userInfo:
-    //         JSON.parse(localStorage.getItem('userInfo'))
-    // }
+    userSignUp: {
+        userInfo:
+            JSON.parse(localStorage.getItem('userInfo'))
+    },
+    userLogin: {
+        userInfo:
+            JSON.parse(localStorage.getItem('userInfo'))
+    }
 }
 
 const middleware = [thunk]

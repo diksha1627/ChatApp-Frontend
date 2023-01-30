@@ -31,7 +31,7 @@ const Signup = () => {
     if(userInfo) {
         Swal.fire({
             icon: 'success',
-            title: 'Login Done'
+            title: 'Signup Done'
         });
     }
 },[userInfo]);

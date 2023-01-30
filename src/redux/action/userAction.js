@@ -12,6 +12,7 @@ import axios from 'axios';
 
 const localStorage = window.localStorage
 const API = process.env.REACT_APP_NODE_API;
+console.log(API);
 
 
 export const userSignUp = (userData) => async (dispatch) => {
@@ -25,9 +26,9 @@ export const userSignUp = (userData) => async (dispatch) => {
         const config = {
             'Content-Type' : 'application/json'
         }
-        const { data } = axios({
+        const { data } = await axios({
             method : "post",
-            url: `${API}/public/signup`,
+            url: `${API}/public/api/user/signup`,
             data: userData,
             config
         });
@@ -61,13 +62,12 @@ export const userLogin = (userData) => async(dispatch) => {
             'Content-Type': 'application/json'
         };
 
-        const { data } = axios({
+        const { data } = await axios({
             method: "post",
-            url:`${API}/public/login`,
+            url:`${API}/public/api/user/login`,
             data: userData,
             config
         });
-
         localStorage.setItem("userInfo",JSON.stringify(data));
 
         dispatch({
